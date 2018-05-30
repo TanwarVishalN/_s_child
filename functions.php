@@ -1,6 +1,8 @@
 <?php
 // Register Custom Post Type
+
  function _s_child_custom_post_type() {
+
 	$labels = array(
 		'name'                  => _x( 'Post Types', 'Post Type General Name', 'text_domain' ),
 		'singular_name'         => _x( 'Post Type', 'Post Type Singular Name', 'text_domain' ),
@@ -50,5 +52,6 @@
 		'capability_type'       => 'page',
 	);
 	register_post_type( 'post_type', $args );
+
 }
 add_action( 'init', '_s_child_custom_post_type', 0 );
