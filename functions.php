@@ -1,14 +1,14 @@
 <?php
 /**
-* _s_child Functions and Definitions
+*  _s_child Functions and Definitions
 *
-* @link https://developer.wordpress.org/themes/basics/theme-functions/
+* @author Vishal Tanwar
 *
-* @package _s_child
+* @version 0.0.1
 */
 
 // Setup theme _s_child
-if( !function_exists( '_s_child_setup' ) {
+if( !function_exists( '_s_child_setup' ) ) {
 	function _s_child_setup() {
 
 		//Add Default Posts and Comments rss feed links
@@ -27,45 +27,52 @@ if( !function_exists( '_s_child_setup' ) {
     add_action( 'after_setup_theme', '_s_child_setup');
 }
 
-// Register Custom Post Type
-if( !function_exists( '_s_child_custom_products' ) ){
+//  Enqueue Style Of Theme
+   function _s_child_scripts() {
+   	wp_enqueue_style( '_s_child-style', get_stylesheet_uri() );
+   }
+   add_action('wp_enqueue_scripts', '_s_child_scropts' );
 
- function _s_child_custom_post_type() {
+
+// Register Custom Post Type
+if( !function_exists( '_s_child_register_tasks' ) ){
+
+ function _s_child_register_tasks() {
 
 	$labels = array(
-		'name'                  => _x( 'Products', 'Post Type General Name', 'product' ),
-		'singular_name'         => _x( 'Product', 'Post Type Singular Name', 'product' ),
-		'menu_name'             => __( 'Products', 'product' ),
-		'name_admin_bar'        => __( 'Product', 'product' ),
-		'archives'              => __( 'Product Archives', 'product' ),
-		'attributes'            => __( 'Product Attributes', 'product' ),
-		'parent_item_colon'     => __( 'Parent Product:', 'product' ),
-		'all_items'             => __( 'All Products', 'product' ),
-		'add_new_item'          => __( 'Add New Product', 'product' ),
-		'add_new'               => __( 'Add New', 'product' ),
-		'new_item'              => __( 'New Product', 'product' ),
-		'edit_item'             => __( 'Edit Product', 'product' ),
-		'update_item'           => __( 'Update Product', 'product' ),
-		'view_item'             => __( 'View Product', 'product' ),
-		'view_items'            => __( 'View Products', 'product' ),
-		'search_items'          => __( 'Search Product', 'product' ),
-		'not_found'             => __( 'Not found', 'product' ),
-		'not_found_in_trash'    => __( 'Not found in Trash', 'product' ),
-		'featured_image'        => __( 'Featured Image', 'product' ),
-		'set_featured_image'    => __( 'Set featured image', 'product' ),
-		'remove_featured_image' => __( 'Remove featured image', 'product' ),
-		'use_featured_image'    => __( 'Use as featured image', 'product' ),
-		'insert_into_item'      => __( 'Insert into item', 'product' ),
-		'uploaded_to_this_item' => __( 'Uploaded to this item', 'product' ),
-		'items_list'            => __( 'Products list', 'product' ),
-		'items_list_navigation' => __( 'Products list navigation', 'product' ),
-		'filter_items_list'     => __( 'Filter products list', 'product' ),
+		'name'                  => _x( 'Tasks', 'Post Type General Name', 'task' ),
+		'singular_name'         => _x( 'Task', 'Post Type Singular Name', 'task' ),
+		'menu_name'             => __( 'Tasks', 'task' ),
+		'name_admin_bar'        => __( 'Task', 'task' ),
+		'archives'              => __( 'Task Archives', 'task' ),
+		'attributes'            => __( 'Task Attributes', 'task' ),
+		'parent_item_colon'     => __( 'Parent Task:', 'task' ),
+		'all_items'             => __( 'All Tasks', 'task' ),
+		'add_new_item'          => __( 'Add New Task', 'task' ),
+		'add_new'               => __( 'Add New', 'task' ),
+		'new_item'              => __( 'New Task', 'task' ),
+		'edit_item'             => __( 'Edit Task', 'task' ),
+		'update_item'           => __( 'Update Task', 'task' ),
+		'view_item'             => __( 'View Task', 'task' ),
+		'view_items'            => __( 'View Tasks', 'task' ),
+		'search_items'          => __( 'Search Task', 'task' ),
+		'not_found'             => __( 'Not found', 'task' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'task' ),
+		'featured_image'        => __( 'Featured Image', 'task' ),
+		'set_featured_image'    => __( 'Set featured image', 'task' ),
+		'remove_featured_image' => __( 'Remove featured image', 'task' ),
+		'use_featured_image'    => __( 'Use as featured image', 'task' ),
+		'insert_into_item'      => __( 'Insert into task', 'task' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this task', 'task' ),
+		'items_list'            => __( 'Tasks list', 'task' ),
+		'items_list_navigation' => __( 'Tasks list navigation', 'task' ),
+		'filter_items_list'     => __( 'Filter tasks list', 'task' ),
 	);
 	$args = array(
-		'label'                 => __( 'Post Type', 'product' ),
-		'description'           => __( 'Post Type Description', 'product' ),
+		'label'                 => __( 'Post Type', 'task' ),
+		'description'           => __( 'Post Type Description', 'task' ),
 		'labels'                => $labels,
-		'supports'              => false,
+		'supports'              => true,
 		'taxonomies'            => array( 'category', 'post_tag' ),
 		'hierarchical'          => false,
 		'public'                => true,
@@ -80,7 +87,7 @@ if( !function_exists( '_s_child_custom_products' ) ){
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
 	);
-	register_post_type( 'product', $args );
+	register_post_type( 'task', $args );
   }
-	add_action( 'init', '_s_child_custom_products', 0 );
+	add_action( 'init', '_s_child_register_tasks', 0 );
 }
