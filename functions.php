@@ -36,7 +36,7 @@ if( !function_exists( '_s_child_setup' ) ) {
 // Register Custom Post Type
 if( !function_exists( '_s_child_custom_products' ) ){
 
- function _s_child_custom_post_type() {
+ function _s_child_custom_products() {
 
 	$labels = array(
 		'name'                  => _x( 'Products', 'Post Type General Name', 'product' ),
