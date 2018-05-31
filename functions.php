@@ -11,8 +11,7 @@
 if( !function_exists( '_s_child_setup' ) ) {
 	function _s_child_setup() {
 
-		//Add Default Posts and Comments rss feed links
-		add_theme_support( 'automatic-feed-links' );
+		//Add Default Posts and Comments rss feed linksdd_theme_support( 'automatic-feed-links' );
 
 		//Enable Post Thumbnails on Posts and Pages
 		add_theme_support( 'post-thumbnails' );
@@ -26,13 +25,6 @@ if( !function_exists( '_s_child_setup' ) ) {
 
     add_action( 'after_setup_theme', '_s_child_setup');
 }
-
-//  Enqueue Style Of Theme
-   function _s_child_scripts() {
-   	wp_enqueue_style( '_s_child-style', get_stylesheet_uri() );
-   }
-   add_action('wp_enqueue_scripts', '_s_child_scropts' );
-
 
 // Register Custom Post Type
 if( !function_exists( '_s_child_register_tasks' ) ){
