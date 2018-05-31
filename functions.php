@@ -8,7 +8,7 @@
 */
 
 // Setup theme _s_child
-if( !function_exists( '_s_child_setup' ) {
+if( !function_exists( '_s_child_setup' ) ) {
 	function _s_child_setup() {
 
 		//Add Default Posts and Comments rss feed links
