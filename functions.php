@@ -28,30 +28,6 @@ if( !function_exists( '_s_child_setup' ) {
 }
 
 // Register Custom Post Type
-if( !function_exists( '_s_child_custom_products' ) ) {
- function _s_child_custom_post_type() {
-
-// Setup theme _s_child
-if( !function_exists( '_s_child_setup' ){
-	function _s_child_setup(){
-
-		//Add Default Posts and Comments rss feed links
-		add_theme_support( 'automatic-feed-links' );
-
-		//Enable Post Thumbnails on Posts and Pages
-		add_theme_support( 'post-thumbnails' );
-
-		//Add Theme Support For title document and does not use code <title> tag
-		add_theme_support( 'title-tag' );
-
-		// Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
-	}
-
-    add_action( 'after_setup_theme', '_s_child_setup');
-}
-
-// Register Custom Post Type
 if( !function_exists( '_s_child_custom_products' ) ){
 
  function _s_child_custom_post_type() {
