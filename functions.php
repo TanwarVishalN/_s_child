@@ -64,7 +64,7 @@ if( !function_exists( '_s_child_register_tasks' ) ){
 		'label'                 => __( 'Post Type', 'task' ),
 		'description'           => __( 'Post Type Description', 'task' ),
 		'labels'                => $labels,
-		'supports'              => true,
+		'supports'              => array('title', 'editor'),
 		'taxonomies'            => array( 'category', 'post_tag' ),
 		'hierarchical'          => false,
 		'public'                => true,
@@ -83,3 +83,30 @@ if( !function_exists( '_s_child_register_tasks' ) ){
   }
 	add_action( 'init', '_s_child_register_tasks', 0 );
 }
+
+/**
+ * Register meta box
+ */
+function _s_child_register_meta_boxes() {
+    add_meta_box( '_s_child-metaBoxId', __( '_s_child Meta Box', 'textdomain' ), '_s_child_my_display_callback', 'task' );
+}
+add_action( 'add_meta_boxes', '_s_child_register_meta_boxes' );
+ 
+/**
+ * Meta box display callback.
+ *
+ * @param WP_Post $post Current post object.
+ */
+function _s_child_my_display_callback( $post ) {
+    // Display code/markup goes here. Don't forget to include nonces!
+}
+ 
+/**
+ * Save meta box content.
+ *
+ * @param int $post_id Post ID
+ */
+function _s_child_save_meta_box( $post_id ) {
+    // Save logic goes here. Don't forget to include nonce checks!
+}
+add_action( 'save_post', '_s_child_save_meta_box' );
