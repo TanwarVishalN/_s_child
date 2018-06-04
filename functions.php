@@ -98,7 +98,10 @@ add_action( 'add_meta_boxes', '_s_child_register_meta_boxes' );
  * @param WP_Post $post Current post object.
  */
 function _s_child_my_display_callback( $post ) {
-    // Display code/markup goes here. Don't forget to include nonces!
+	?>
+   <label for="input-task"> Input Task </label>
+	    <input type="checkbox" value="Input Task" id="input-task" name="input-task" />
+<?php
 }
  
 /**
