@@ -32,39 +32,39 @@ if( !function_exists( '_s_child_register_tasks' ) ){
  function _s_child_register_tasks() {
 
 	$labels = array(
-		'name'                  => _x( 'Tasks', 'Post Type General Name', 'task' ),
-		'singular_name'         => _x( 'Task', 'Post Type Singular Name', 'task' ),
-		'menu_name'             => __( 'Tasks', 'task' ),
-		'name_admin_bar'        => __( 'Task', 'task' ),
-		'archives'              => __( 'Task Archives', 'task' ),
-		'attributes'            => __( 'Task Attributes', 'task' ),
-		'parent_item_colon'     => __( 'Parent Task:', 'task' ),
-		'all_items'             => __( 'All Tasks', 'task' ),
-		'add_new_item'          => __( 'Add New Task', 'task' ),
-		'add_new'               => __( 'Add New', 'task' ),
-		'new_item'              => __( 'New Task', 'task' ),
-		'edit_item'             => __( 'Edit Task', 'task' ),
-		'update_item'           => __( 'Update Task', 'task' ),
-		'view_item'             => __( 'View Task', 'task' ),
-		'view_items'            => __( 'View Tasks', 'task' ),
-		'search_items'          => __( 'Search Task', 'task' ),
-		'not_found'             => __( 'Not found', 'task' ),
-		'not_found_in_trash'    => __( 'Not found in Trash', 'task' ),
-		'featured_image'        => __( 'Featured Image', 'task' ),
-		'set_featured_image'    => __( 'Set featured image', 'task' ),
-		'remove_featured_image' => __( 'Remove featured image', 'task' ),
-		'use_featured_image'    => __( 'Use as featured image', 'task' ),
-		'insert_into_item'      => __( 'Insert into task', 'task' ),
-		'uploaded_to_this_item' => __( 'Uploaded to this task', 'task' ),
-		'items_list'            => __( 'Tasks list', 'task' ),
-		'items_list_navigation' => __( 'Tasks list navigation', 'task' ),
-		'filter_items_list'     => __( 'Filter tasks list', 'task' ),
+		'name'                  => _x( 'Tasks', 'Post Type General Name', '_s_child' ),
+		'singular_name'         => _x( 'Task', 'Post Type Singular Name', '_s_child' ),
+		'menu_name'             => __( 'Tasks', '_s_child' ),
+		'name_admin_bar'        => __( 'Task', '_s_child' ),
+		'archives'              => __( 'Task Archives', '_s_child' ),
+		'attributes'            => __( 'Task Attributes', '_s_child' ),
+		'parent_item_colon'     => __( 'Parent Task:', '_s_child' ),
+		'all_items'             => __( 'All Tasks', '_s_child' ),
+		'add_new_item'          => __( 'Add New Task', '_s_child' ),
+		'add_new'               => __( 'Add New', '_s_child' ),
+		'new_item'              => __( 'New Task', '_s_child' ),
+		'edit_item'             => __( 'Edit Task', '_s_child' ),
+		'update_item'           => __( 'Update Task', '_s_child' ),
+		'view_item'             => __( 'View Task', '_s_child' ),
+		'view_items'            => __( 'View Tasks', '_s_child' ),
+		'search_items'          => __( 'Search Task', '_s_child' ),
+		'not_found'             => __( 'Not found', '_s_child' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', '_s_child' ),
+		'featured_image'        => __( 'Featured Image', '_s_child' ),
+		'set_featured_image'    => __( 'Set featured image', '_s_child' ),
+		'remove_featured_image' => __( 'Remove featured image', '_s_child' ),
+		'use_featured_image'    => __( 'Use as featured image', '_s_child' ),
+		'insert_into_item'      => __( 'Insert into task', '_s_child' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this task', '_s_child' ),
+		'items_list'            => __( 'Tasks list', '_s_child' ),
+		'items_list_navigation' => __( 'Tasks list navigation', '_s_child' ),
+		'filter_items_list'     => __( 'Filter tasks list', '_s_child' ),
 	);
 	$args = array(
-		'label'                 => __( 'Post Type', 'task' ),
-		'description'           => __( 'Post Type Description', 'task' ),
+		'label'                 => __( 'Post Type', '_s_child' ),
+		'description'           => __( 'Post Type Description', '_s_child' ),
 		'labels'                => $labels,
-		'supports'              => array('title', 'editor'),
+		'supports'				=> array('title','editor'),
 		'taxonomies'            => array( 'category', 'post_tag' ),
 		'hierarchical'          => false,
 		'public'                => true,
@@ -88,7 +88,7 @@ if( !function_exists( '_s_child_register_tasks' ) ){
  * Register meta box
  */
 function _s_child_register_meta_boxes() {
-    add_meta_box( '_s_child-metaBoxId', __( '_s_child Meta Box', 'textdomain' ), '_s_child_my_display_callback', 'task' );
+    add_meta_box( '_s_child-metaBoxId', __( 'Task Status', '_s_child' ), '_s_child_display_meta_box', 'task' );
 }
 add_action( 'add_meta_boxes', '_s_child_register_meta_boxes' );
  
@@ -97,19 +97,50 @@ add_action( 'add_meta_boxes', '_s_child_register_meta_boxes' );
  *
  * @param WP_Post $post Current post object.
  */
-function _s_child_my_display_callback( $post ) {
-	?>
-   <label for="input-task"> Input Task </label>
-	    <input type="checkbox" value="Input Task" id="input-task" name="input-task" />
+function _s_child_display_meta_box( $post ) {
+	
+// 	Retreiving all post meta data
+	$task_status_value =  esc_attr( get_post_meta( $post->ID, '_s_child_task_status', true ) );
+
+// 	Inserting Nonce field for securing or validating form request values
+	wp_nonce_field('_s_child_task_status_action', '_s_child_task_status') ;
+    ?>
+
+      <input type="checkbox" id="_s_child-checkbox" class="_s_child-checkbox" name="_s_child_task_status" value="true" <?php checked( $task_status_value ) ;?> />
+      <label for="_s_child-checkbox" class="_s_child-custom-checkbox">
+        	<span>
+				<svg width="12px" height="10px" viewBox="0 0 12 10">
+				  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+				</svg>
+		    </span>
+     		<span>Task Completed</span>
+	  </label>
+	
 <?php
 }
  
 /**
- * Save meta box content.
+ * Save meta box content of _s_child .
  *
  * @param int $post_id Post ID
  */
-function _s_child_save_meta_box( $post_id ) {
-    // Save logic goes here. Don't forget to include nonce checks!
+function _s_child_save_meta_box_data( $post_id ) {
+//     Return if WP nonce is not verified
+	if( !isset( $_POST['_s_child_task_status'] ) || !wp_verify_nonce( $_POST['_s_child_task_status'], '_s_child_task_status' ) ):
+		return;
+	endif;
+	
+// Update The _s_child Task Status 
+   $task_status_value = isset( $_POST['_s_child_task_status'] ) ? $_POST['_s_child_task_status'] : "false" ;
+	update_post_meta( $post_id, '_s_child_task_status', $task_status_value );
 }
-add_action( 'save_post', '_s_child_save_meta_box' );
+// Hook in save_task_post to save meta box data
+add_action( 'save_post_task', '_s_child_save_meta_box_data' );
+
+/**
+ * Add Stylinfg to Custom Meta box  
+ */
+function _s_child_admin_stylesheet(){
+        wp_enqueue_style( '_s_chlid_admin_style', get_stylesheet_uri() );
+}
+add_action('admin_enqueue_scripts', '_s_child_admin_stylesheet');
