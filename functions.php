@@ -83,8 +83,6 @@ function _s_child_display_meta_box( $post ) {
 // 	Retreiving all post meta data
 	$task_status_value =  esc_attr( get_post_meta( $post->ID, '_s_child_task_status', true ) );
 
-// 	Inserting Nonce field for securing or validating form request values
-	wp_nonce_field('_s_child_task_status_action', '_s_child_task_status') ;
     ?>
 
       <input type="checkbox" id="_s_child-checkbox" class="_s_child-checkbox" name="_s_child_task_status" value="true" <?php checked( $task_status_value ) ;?> />
