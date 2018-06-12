@@ -7,25 +7,6 @@
 * @version 0.0.1
 */
 
-// Setup theme _s_child
-if( !function_exists( '_s_child_setup' ) ) {
-	function _s_child_setup() {
-
-		//Add Default Posts and Comments rss feed linksdd_theme_support( 'automatic-feed-links' );
-
-		//Enable Post Thumbnails on Posts and Pages
-		add_theme_support( 'post-thumbnails' );
-
-		//Add Theme Support For title document and does not use code <title> tag
-		add_theme_support( 'title-tag' );
-
-		// Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
-	}
-
-    add_action( 'after_setup_theme', '_s_child_setup');
-}
-
 // Register Custom Post Type
 if( !function_exists( '_s_child_register_tasks' ) ){
 
@@ -108,11 +89,7 @@ function _s_child_display_meta_box( $post ) {
 
       <input type="checkbox" id="_s_child-checkbox" class="_s_child-checkbox" name="_s_child_task_status" value="true" <?php checked( $task_status_value ) ;?> />
       <label for="_s_child-checkbox" class="_s_child-custom-checkbox">
-        	<span>
-				<svg width="12px" height="10px" viewBox="0 0 12 10">
-				  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-				</svg>
-		    </span>
+        	
      		<span>Task Completed</span>
 	  </label>
 	
@@ -137,10 +114,3 @@ function _s_child_save_meta_box_data( $post_id ) {
 // Hook in save_task_post to save meta box data
 add_action( 'save_post_task', '_s_child_save_meta_box_data' );
 
-/**
- * Add Stylinfg to Custom Meta box  
- */
-function _s_child_admin_stylesheet(){
-        wp_enqueue_style( '_s_chlid_admin_style', get_stylesheet_uri() );
-}
-add_action('admin_enqueue_scripts', '_s_child_admin_stylesheet');
