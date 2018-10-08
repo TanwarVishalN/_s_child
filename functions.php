@@ -45,7 +45,7 @@ if( !function_exists( '_s_child_register_tasks' ) ){
 		'label'                 => __( 'Post Type', '_s_child' ),
 		'description'           => __( 'Post Type Description', '_s_child' ),
 		'labels'                => $labels,
-		'supports'				=> array('title','editor'),
+		'supports'		=> array('title','editor'),
 		'taxonomies'            => array( 'category', 'post_tag' ),
 		'hierarchical'          => false,
 		'public'                => true,
